@@ -145,6 +145,17 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  // STRETCH GOAL - this method randomly adding a number between -50 and 50 to a student's grade
+  addOrSubtract(studentObj) {
+    //add or subtract points
+    studentObj.grade += Math.floor(Math.random() * 101) - 51;
+    //endcaps for grades set at 1 and 100
+    if (studentObj.grade > 100) {
+      studentObj.grade = 100;
+    } else if (studentObj.grade < 1) {
+      studentObj.grade = 1;
+    }
+  }
 }
 
 /*
@@ -168,6 +179,7 @@ class Student extends Lambdasian {
     this.previousBackground = obj.previousBackground;
     this.className = obj.className;
     this.favSubjects = obj.favSubjects;
+    // STRETCH GOAL - initializing student's grade between 1 and 100
     this.grade = Math.floor(Math.random() * 100) + 1;
   }
   listSubjects() {
@@ -178,6 +190,14 @@ class Student extends Lambdasian {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  //STRETCH GOAL - method letting student graduate if grade is greater than 70%, regrade if <= 70
+  graduate() {
+    if(this.grade > 70) {
+      return `Congratulations, ${this.name}!! You graduated Lambda School!`;
+    } else {
+      instructorObj.addOrSubtract(this);
+    }
   }
 }
 
